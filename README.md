@@ -4,9 +4,12 @@
 
 To get started:
 
-1. create virtual environment:
+1. create virtual environment and enable:
 
-```python -m venv venv```
+```
+python -m venv venv
+source venv/bin/activate
+```
 
 2. install the python requirements:
 ```pip install .[dev]```
