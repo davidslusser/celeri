@@ -5,29 +5,29 @@ from handyhelpers.permissions import InAnyGroup
 from handyhelpers.views import HandyHelperIndexView, HandyHelperListPlusCreateAndFilterView
 
 # import models
-# from app1.models import ()
+# from casemgr.models import ()
 
 # import forms
-# from app1.forms import ()
+# from casemgr.forms import ()
 
 
 class Index(HandyHelperIndexView):
-    """render the app1 index page"""
+    """render the casemgr index page"""
 
-    title = """App1"""
+    title = """Casemgr"""
     subtitle = "Select an option below"
     item_list = [
         {
-            "url": "/app1/dashboard",
+            "url": "/casemgr/dashboard",
             "icon": "fas fa-tachometer-alt",
             "title": "Dashboard",
-            "description": "Dashboard for App1 ",
+            "description": "Dashboard for Casemgr ",
         },
         {
-            "url": "/app1/rest",
+            "url": "/casemgr/rest",
             "icon": "fas fa-download",
             "title": "APIs",
-            "description": "List RESTful APIs for App1",
+            "description": "List RESTful APIs for Casemgr",
         },
     ]
     protected_item_list = []

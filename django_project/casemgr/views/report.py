@@ -8,21 +8,21 @@ from handyhelpers.views.report import AnnualTrendView, AnnualStatView, AnnualPro
 # from handyhelpers.views.report import get_colors
 
 # import models
-# from app1.models import ()
+# from casemgr.models import ()
 
 
-class App1Dashboard(View):
-    """app1 dashboard"""
+class CasemgrDashboard(View):
+    """casemgr dashboard"""
 
-    template_name = "app1/custom/dashboard.html"
+    template_name = "casemgr/custom/dashboard.html"
 
     def get(self, request):
-        """render dashboard for app1 specific data"""
-        context = {"title": "App1 Dashboard"}
+        """render dashboard for casemgr specific data"""
+        context = {"title": "Casemgr Dashboard"}
         return render(request, self.template_name, context=context)
 
 
-class App1AnnualProgressView(AnnualProgressView):
+class CasemgrAnnualProgressView(AnnualProgressView):
     """ """
 
     dataset_list = [
@@ -36,7 +36,7 @@ class App1AnnualProgressView(AnnualProgressView):
     ]
 
 
-class App1AnnualStatView(AnnualStatView):
+class CasemgrAnnualStatView(AnnualStatView):
     """ """
 
     dataset_list = [
@@ -50,7 +50,7 @@ class App1AnnualStatView(AnnualStatView):
     ]
 
 
-class App1AnnualTrendView(AnnualTrendView):
+class CasemgrAnnualTrendView(AnnualTrendView):
     """ """
 
     dataset_list = [

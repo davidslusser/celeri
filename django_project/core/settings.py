@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "rest_framework_filters",
     # project apps
+    "casemgr",
 ]
 
 MIDDLEWARE = [

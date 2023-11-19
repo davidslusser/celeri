@@ -1,12 +1,12 @@
 from django.urls import path
 from django.conf.urls import include
 from rest_framework import routers
-from app1.views import rest
+from casemgr.views import rest
 
 router = routers.DefaultRouter()
 
 
-# app1 API Endpoints
+# casemgr API Endpoints
 # router.register(r"model_name", rest.ModelViewSet, "model_name")
 
 

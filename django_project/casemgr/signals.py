@@ -4,4 +4,4 @@ from django.contrib.auth.signals import user_logged_in, user_logged_out, user_lo
 from django.dispatch import receiver
 
 # import models
-# from app1.models import ()
+# from casemgr.models import ()

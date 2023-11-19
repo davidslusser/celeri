@@ -7,10 +7,10 @@ from rest_flex_fields import is_expanded
 from handyhelpers.drf_permissions import InAnyGroup
 
 # import models
-# from app1.models import ()
+# from casemgr.models import ()
 
 # import serializers
-# from app1.serializers import ()
+# from casemgr.serializers import ()
 
 # import filtersets
-# from app1.filtersets import ()
+# from casemgr.filtersets import ()

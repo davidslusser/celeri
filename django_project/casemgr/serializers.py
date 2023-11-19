@@ -1,7 +1,7 @@
-""" DRF serailizers for applicable app1 models """
+""" DRF serailizers for applicable casemgr models """
 
 from rest_framework import serializers
 from rest_flex_fields import FlexFieldsModelSerializer
 
 # import models
-# from app1.models import ()
+# from casemgr.models import ()
