@@ -3,7 +3,7 @@ from django.contrib import admin
 # import models
 from casemgr.models import (Booking,
                             Court,
-                            Case,
+                            CourtCase,
                             CaseFile,
                             Defendant,
                             Defender,
@@ -25,7 +25,7 @@ class CourtAdmin(admin.ModelAdmin):
     list_filter = ['court_type']
 
 
-class CaseAdmin(admin.ModelAdmin):
+class CourtCaseAdmin(admin.ModelAdmin):
     list_display = ['id', 'created_at', 'updated_at', 'case_number', 'title', 'booking', 'defendant']
     search_fields = ['id', 'case_number', 'title']
     list_filter = ['booking', 'defendant']
@@ -50,9 +50,9 @@ class DefenderAdmin(admin.ModelAdmin):
 
 
 class HearingAdmin(admin.ModelAdmin):
-    list_display = ['id', 'created_at', 'updated_at', 'case', 'hearing_date', 'judge', 'hearing_type']
+    list_display = ['id', 'created_at', 'updated_at', 'court_case', 'hearing_date', 'judge', 'hearing_type']
     search_fields = ['id', 'hearing_date', 'hearing_type']
-    list_filter = ['case', 'judge', 'hearing_type']
+    list_filter = ['court_case__case_number', 'judge', 'hearing_type']
 
 
 class JudgeAdmin(admin.ModelAdmin):
@@ -70,7 +70,7 @@ class ProsecutorAdmin(admin.ModelAdmin):
 # register models
 admin.site.register(Booking, BookingAdmin)
 admin.site.register(Court, CourtAdmin)
-admin.site.register(Case, CaseAdmin)
+admin.site.register(CourtCase, CourtCaseAdmin)
 admin.site.register(CaseFile, CaseFileAdmin)
 admin.site.register(Defendant, DefendantAdmin)
 admin.site.register(Defender, DefenderAdmin)

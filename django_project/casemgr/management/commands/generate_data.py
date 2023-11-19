@@ -25,8 +25,10 @@ class Command(BaseCommand):
         self.generate_courts()
         self.generate_defenders()
         self.generate_prosecutors()
+        self.generate_judges()
         self.generate_bookings()
         self.generate_cases()
+        self.generate_hearings()
 
     def generate_courts(self, qty=5):
         """generate some Court entries"""
@@ -51,6 +53,15 @@ class Command(BaseCommand):
                        lawfirm=f.company(),
                        )
 
+    def generate_judges(self, qty=5):
+        """generate some Judge entries"""
+        f = Faker()
+        for _ in range(qty):
+            baker.make("casemgr.judge",
+                       first_name=f.first_name(),
+                       last_name=f.last_name(),
+                       )
+
     def generate_prosecutors(self, qty=5):
         """generate some Defendor entries"""
         f = Faker()
@@ -61,7 +72,6 @@ class Command(BaseCommand):
                        last_name=f.last_name(),
                        lawfirm=f.company(),
                        )
-
 
     def generate_bookings(self, qty=10):
         """generate some Booking entries"""
@@ -90,7 +100,7 @@ class Command(BaseCommand):
             defender_model = apps.get_model("casemgr.defender")
             prosecutor_model = apps.get_model("casemgr.prosecutor")
 
-            case = baker.make("casemgr.case",
+            case = baker.make("casemgr.courtcase",
                        case_number="".join(random.choices(string.digits, k=8)),
                        title="a very interesting case title",
                        booking=booking_model.objects.get_random_row(),
@@ -98,4 +108,17 @@ class Command(BaseCommand):
                        )
             case.defenders.add(defender_model.objects.get_random_row())
             case.prosecutors.add(prosecutor_model.objects.get_random_row())
+
+    def generate_hearings(self, qty=16):
+        """generate some Hearing entries"""
+        case_model=apps.get_model("casemgr.courtcase")
+        judge_model=apps.get_model("casemgr.judge")
+        f = Faker()
+        for _ in range(qty):
+            baker.make("casemgr.hearing",
+                       court_case=case_model.objects.get_random_row(),
+                       judge=judge_model.objects.get_random_row(),
+                       hearing_date=f.date()
+                       )
+            
 

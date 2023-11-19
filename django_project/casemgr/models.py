@@ -81,7 +81,7 @@ class Court(HandyHelperBaseModel):
         return reverse("casemgr:court", kwargs={"pk": self.pk})
 
 
-class Case(HandyHelperBaseModel):
+class CourtCase(HandyHelperBaseModel):
     case_number = models.CharField(max_length=64, blank=True, null=True, help_text="")
     title = models.CharField(max_length=64, blank=True, null=True, help_text="")
     booking = models.ForeignKey("Booking", on_delete=models.CASCADE)
@@ -125,13 +125,13 @@ class Hearing(HandyHelperBaseModel):
         ("probate", 'probate'),
     ]
     
-    case = models.ForeignKey("Case", on_delete=models.CASCADE)
+    court_case = models.ForeignKey("CourtCase", on_delete=models.CASCADE)
     hearing_date = models.DateField()
     judge = models.ForeignKey("Judge", on_delete=models.CASCADE)
     hearing_type = models.CharField(max_length=32, choices=HEARING_TYPE_CHOICES)
 
     def __str__(self) -> str:
-        return self.case_number
+        return f"{self.id}"
 
     def get_absolute_url(self) -> str:
         return reverse("casemgr:hearing", kwargs={"pk": self.pk})
@@ -151,7 +151,7 @@ class Prosecutor(Lawyer):
 
 # register models with auditlog
 auditlog.register(Booking)
-auditlog.register(Case)
+auditlog.register(CourtCase)
 auditlog.register(Court)
 auditlog.register(Hearing)
 auditlog.register(Defendant)
