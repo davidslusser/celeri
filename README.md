@@ -20,8 +20,8 @@ To get started:
 3. install the python requirements:
 ```pip install .[dev]```
 
-4. cd to the celeri directory (django project directory)
-```cd celeri```
+4. cd to the django_project directory
+```cd django_project```
 
 5. run migrations (creates the database):
 ```python manage.py migrate```
@@ -33,4 +33,7 @@ To get started:
 ```python manage.py runserver```
 
 8. log in to the locally running system at: http://127.0.0.1:8000
+
+    - login with admin/admin
+    - navigate to http://127.0.0.1:8000/admin to play with data
 

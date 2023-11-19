@@ -40,7 +40,7 @@ urlpatterns = [
     # URLs to local apps
     path("", views.Index.as_view(), name="index"),
     path("dashboard/", views.ProjectDashboard.as_view(), name="dashboard"),
-    # path("app1/", include("app1.urls", namespace="app1")),
+    path("casemgr/", include("casemgr.urls", namespace="casemgr")),
 ]
 
 if settings.DEBUG:
