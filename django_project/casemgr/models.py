@@ -25,6 +25,7 @@ class Human(HandyHelperBaseModel, ContactObject):
     class Meta:
         abstract = True
 
+
 class Arrestee(Human):
     SEX_CHOICES = [
         ("M", 'Male'),
@@ -33,6 +34,17 @@ class Arrestee(Human):
     
     dob = models.DateField()
     sex = models.CharField(max_length=1, choices=SEX_CHOICES)
+
+    class Meta:
+        abstract = True
+
+
+class Lawyer(Human, ContactObject):
+    lawfirm = models.CharField(max_length=64, help_text="")
+    license = models.CharField(max_length=32, unique=True, help_text="")
+    
+    def __str__(self) -> str:
+        return f"{self.first_name} {self.last_name}"
 
     class Meta:
         abstract = True
@@ -99,7 +111,7 @@ class Defendant(Arrestee):
         return f"{self.first_name} {self.last_name}"
 
 
-class Defender(Human):
+class Defender(Lawyer):
 
     def __str__(self) -> str:
         return f"{self.first_name} {self.last_name}"
@@ -118,7 +130,6 @@ class Hearing(HandyHelperBaseModel):
     judge = models.ForeignKey("Judge", on_delete=models.CASCADE)
     hearing_type = models.CharField(max_length=32, choices=HEARING_TYPE_CHOICES)
 
-
     def __str__(self) -> str:
         return self.case_number
 
@@ -132,7 +143,7 @@ class Judge(Human):
         return f"{self.first_name} {self.last_name}"
 
 
-class Prosecutor(Human, ContactObject):
+class Prosecutor(Lawyer):
 
     def __str__(self) -> str:
         return f"{self.first_name} {self.last_name}"

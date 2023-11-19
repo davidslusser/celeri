@@ -1,4 +1,4 @@
-# project_template_default# Celeri WebApp
+# Celeri WebApp
 initial repository for the Celeri webapp
 
 <br/>

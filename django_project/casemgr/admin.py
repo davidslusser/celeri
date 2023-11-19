@@ -44,8 +44,8 @@ class DefendantAdmin(admin.ModelAdmin):
 
 
 class DefenderAdmin(admin.ModelAdmin):
-    list_display = ['id', 'created_at', 'updated_at', 'address', 'city', 'state', 'zip_code', 'email_address', 'phone_number', 'title', 'first_name', 'middle_name', 'last_name']
-    search_fields = ['id', 'address', 'city', 'state', 'zip_code', 'email_address', 'phone_number', 'title', 'first_name', 'middle_name', 'last_name']
+    list_display = ['id', 'created_at', 'updated_at', 'address', 'city', 'state', 'zip_code', 'email_address', 'phone_number', 'title', 'first_name', 'middle_name', 'last_name', 'lawfirm', 'license']
+    search_fields = ['id', 'address', 'city', 'state', 'zip_code', 'email_address', 'phone_number', 'title', 'first_name', 'middle_name', 'last_name', 'lawfirm', 'license']
     list_filter = []
 
 
@@ -62,8 +62,8 @@ class JudgeAdmin(admin.ModelAdmin):
 
 
 class ProsecutorAdmin(admin.ModelAdmin):
-    list_display = ['id', 'created_at', 'updated_at', 'address', 'city', 'state', 'zip_code', 'email_address', 'phone_number', 'title', 'first_name', 'middle_name', 'last_name']
-    search_fields = ['id', 'address', 'city', 'state', 'zip_code', 'email_address', 'phone_number', 'title', 'first_name', 'middle_name', 'last_name']
+    list_display = ['id', 'created_at', 'updated_at', 'address', 'city', 'state', 'zip_code', 'email_address', 'phone_number', 'title', 'first_name', 'middle_name', 'last_name', 'lawfirm', 'license']
+    search_fields = ['id', 'address', 'city', 'state', 'zip_code', 'email_address', 'phone_number', 'title', 'first_name', 'middle_name', 'last_name', 'lawfirm', 'license']
     list_filter = []
 
 

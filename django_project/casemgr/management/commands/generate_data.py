@@ -23,6 +23,8 @@ class Command(BaseCommand):
         """command entry point"""
         print("Generating test data for the Celeri CaseMgr app")
         self.generate_courts()
+        self.generate_defenders()
+        self.generate_prosecutors()
         self.generate_bookings()
         self.generate_cases()
 
@@ -37,6 +39,29 @@ class Command(BaseCommand):
                        state=f.state(),
                        zip_code=f.zipcode(),
                        )
+
+    def generate_defenders(self, qty=5):
+        """generate some Defendor entries"""
+        f = Faker()
+        for _ in range(qty):
+            baker.make("casemgr.defender",
+                       license=''.join(random.choices(string.digits, k=8)),
+                       first_name=f.first_name(),
+                       last_name=f.last_name(),
+                       lawfirm=f.company(),
+                       )
+
+    def generate_prosecutors(self, qty=5):
+        """generate some Defendor entries"""
+        f = Faker()
+        for _ in range(qty):
+            baker.make("casemgr.prosecutor",
+                       license=''.join(random.choices(string.digits, k=8)),
+                       first_name=f.first_name(),
+                       last_name=f.last_name(),
+                       lawfirm=f.company(),
+                       )
+
 
     def generate_bookings(self, qty=10):
         """generate some Booking entries"""
@@ -62,9 +87,15 @@ class Command(BaseCommand):
         for _ in range(qty):
             booking_model=apps.get_model("casemgr.booking")
             defendant_model = apps.get_model("casemgr.defendant")
-            baker.make("casemgr.case",
+            defender_model = apps.get_model("casemgr.defender")
+            prosecutor_model = apps.get_model("casemgr.prosecutor")
+
+            case = baker.make("casemgr.case",
                        case_number="".join(random.choices(string.digits, k=8)),
                        title="a very interesting case title",
                        booking=booking_model.objects.get_random_row(),
                        defendant=defendant_model.objects.get_random_row(),
                        )
+            case.defenders.add(defender_model.objects.get_random_row())
+            case.prosecutors.add(prosecutor_model.objects.get_random_row())
+
