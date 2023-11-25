@@ -37,3 +37,11 @@ To get started:
     - login with admin/admin
     - navigate to http://127.0.0.1:8000/admin to play with data
 
+
+
+
+## Celery
+export DJANGO_SETTINGS_MODULE=core.settings
+celery -A core worker -Q normal -l info
+celery -A core beat -l info
+

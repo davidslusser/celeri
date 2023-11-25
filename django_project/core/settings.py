@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     # third party apps
     "auditlog",
     "debug_toolbar",
+    "django_celery_beat",
     "django_extensions",
     "django_filters",
     "djangoaddicts.hostutils",
@@ -277,11 +278,19 @@ SPECTACULAR_SETTINGS = {
     "VERSION": "1.0.0",
 }
 
-PROJECT_NAME = "celeri"
+PROJECT_NAME = "Celeri"
 PROJECT_DESCRIPTION = (
-    """celeri is a super awesome project powered, in part, by amazing code provided by DjangoAddicts."""
+    """Celeri is a super awesome project powered, in part, by amazing code provided by DjangoAddicts."""
 )
 PROJECT_VERSION = env.str("PROJECT_VERSION", "0.0.1")
 PROJECT_SOURCE = "https://github.com/djangoaddicts"
 
 PYGWALKER_THEME = "light"
+
+# celery settings
+BROKER_URL = env.str("BROKER_URL", "redis://localhost:6379/0")
+CELERY_RESULT_BACKEND = env.str("CELERY_RESULT_BACKEND", "redis://localhost:6379")
+CELERYBEAT_SCHEDULER = env.str("CELERYBEAT_SCHEDULER", "django_celery_beat.schedulers:DatabaseScheduler")
+CELERY_ACCEPT_CONTENT = ["application/json"]
+CELERY_TASK_SERIALIZER = env.str("CELERY_TASK_SERIALIZER", "json")
+CELERY_RESULT_SERIALIZER = env.str("CELERY_RESULT_SERIALIZER", "json")
