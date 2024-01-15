@@ -27,8 +27,9 @@ def write_to_db(content):
                 "bondable": data_row[3],
                 "total_bond": convert_currency_to_decimal(data_row[4]),
             }
-            Booking.objects.get_or_create(booking_id=data_row[1], defaults=data)
-            get_booking_details(data_row[1])
+            _, is_new =Booking.objects.get_or_create(booking_id=data_row[1], defaults=data)
+            if is_new:
+                get_booking_details(data_row[1])
 
 
 def get_roster():
@@ -77,6 +78,7 @@ def get_booking_details(booking_id):
     county_id_xpath = "/html/body/div/div[3]/div[2]/text()"
     # case_xpath = "/html/body/div/div[6]/h2/text()"
 
+    print("TEST", root.xpath(intakedate_xpath)[0])
     intake_date = arrow.get(root.xpath(intakedate_xpath)[0].strip(), "M/D/YYYY [at] h:mm A").datetime
     county_id = root.xpath(county_id_xpath)[0].strip()
     # print("TEST: ", root.xpath(case_xpath)[0])

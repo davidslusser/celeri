@@ -1,9 +1,9 @@
 from django.apps import AppConfig
 
 
-class App0Config(AppConfig):
+class CasemgrConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "casemgr"
 
     def ready(self):
-        pass
+        import casemgr.signals
