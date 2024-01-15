@@ -6,4 +6,4 @@ class App0Config(AppConfig):
     name = "casemgr"
 
     def ready(self):
-        import casemgr.signals
+        pass

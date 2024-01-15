@@ -1,6 +1,5 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from djangoaddicts.signalcontrol.decorators import signal_control
 
 # import models
 from casemgr.models import Booking

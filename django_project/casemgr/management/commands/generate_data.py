@@ -1,10 +1,8 @@
-import os
 import random
 import string
 
 from django.apps import apps
-from django.conf import settings
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from faker import Faker
 from model_bakery import baker
 

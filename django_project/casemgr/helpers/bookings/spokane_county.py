@@ -76,7 +76,7 @@ def get_booking_details(booking_id):
     root = html.fromstring(str(soup))
     intakedate_xpath = "/html/body/div/div[4]/text()"
     county_id_xpath = "/html/body/div/div[3]/div[2]/text()"
-    case_xpath = "/html/body/div/div[6]/h2/text()"
+    # case_xpath = "/html/body/div/div[6]/h2/text()"
 
     intake_date = arrow.get(root.xpath(intakedate_xpath)[0].strip(), "M/D/YYYY [at] h:mm A").datetime
     county_id = root.xpath(county_id_xpath)[0].strip()
