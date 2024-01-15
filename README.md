@@ -41,6 +41,7 @@ To get started:
 
 
 ## Celery
+from the django_project directory: 
 export DJANGO_SETTINGS_MODULE=core.settings
 celery -A core worker -Q normal -l info
 celery -A core beat -l info
