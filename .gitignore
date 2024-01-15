@@ -71,3 +71,4 @@ django_project/yarn.lock
 django_project/__version__.py
 celeri/django_logs
 celeri/casemgr.png
+tmp

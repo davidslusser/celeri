@@ -1,7 +1,5 @@
+from casemgr.views import gui, report
 from django.urls import path
-from casemgr.views import gui
-from casemgr.views import report
-
 
 urlpatterns = [
     # GUI views
@@ -9,6 +7,7 @@ urlpatterns = [
     path("index", gui.Index.as_view(), name="index"),
     path("default", gui.Index.as_view(), name="default"),
     path("home", gui.Index.as_view(), name="home"),
+    path("test", gui.Test.as_view(), name="test"),
     # list views
     # path("list_mymodels/", gui.ListMymodels.as_view(), name="list_mymodels"),
     # detail views

@@ -1,69 +1,187 @@
-from django.contrib import admin
-
 # import models
-from casemgr.models import (Booking,
-                            Court,
-                            CourtCase,
-                            CaseFile,
-                            Defendant,
-                            Defender,
-                            Hearing,
-                            Judge,
-                            Prosecutor
-                            )
+from casemgr.models import (Booking, CaseFile, Court, CourtCase, Defendant,
+                            Defender, Hearing, Judge, Prosecutor)
+from django.contrib import admin
 
 
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ['id', 'created_at', 'updated_at', 'address', 'city', 'state', 'zip_code', 'email_address', 'phone_number', 'title', 'first_name', 'middle_name', 'last_name', 'dob', 'sex', 'booking_id', 'booking_officer', 'arresting_officer', 'details']
-    search_fields = ['id', 'address', 'city', 'state', 'zip_code', 'email_address', 'phone_number', 'title', 'first_name', 'middle_name', 'last_name', 'dob', 'sex', 'booking_id', 'booking_officer', 'arresting_officer', 'details']
-    list_filter = ['sex']
+    list_display = [
+        "id",
+        "created_at",
+        "updated_at",
+        "booking_id",
+        "county_id",
+        "inmate_name",
+        "intake_date",
+        "status",
+        "bondable",
+        "total_bond",
+    ]
+    search_fields = ["id", "booking_id", "county_id", "inmate_name", "status", "bondable", "total_bond"]
+    list_filter = ["bondable"]
 
 
 class CourtAdmin(admin.ModelAdmin):
-    list_display = ['id', 'created_at', 'updated_at', 'name', 'address', 'city', 'state', 'zip_code', 'court_type']
-    search_fields = ['id', 'name', 'address', 'city', 'state', 'zip_code', 'court_type']
-    list_filter = ['court_type']
+    list_display = ["id", "created_at", "updated_at", "name", "address", "city", "state", "zip_code", "court_type"]
+    search_fields = ["id", "name", "address", "city", "state", "zip_code", "court_type"]
+    list_filter = ["court_type"]
 
 
 class CourtCaseAdmin(admin.ModelAdmin):
-    list_display = ['id', 'created_at', 'updated_at', 'case_number', 'title', 'booking', 'defendant']
-    search_fields = ['id', 'case_number', 'title']
-    list_filter = ['booking', 'defendant']
+    list_display = ["id", "created_at", "updated_at", "case_number", "title", "booking", "defendant"]
+    search_fields = ["id", "case_number", "title"]
+    list_filter = ["booking", "defendant"]
 
 
 class CaseFileAdmin(admin.ModelAdmin):
-    list_display = ['id', 'created_at', 'updated_at', 'title', 'url']
-    search_fields = ['id', 'title', 'url']
+    list_display = ["id", "created_at", "updated_at", "title", "url"]
+    search_fields = ["id", "title", "url"]
     list_filter = []
 
 
 class DefendantAdmin(admin.ModelAdmin):
-    list_display = ['id', 'created_at', 'updated_at', 'address', 'city', 'state', 'zip_code', 'email_address', 'phone_number', 'title', 'first_name', 'middle_name', 'last_name', 'dob', 'sex']
-    search_fields = ['id', 'address', 'city', 'state', 'zip_code', 'email_address', 'phone_number', 'title', 'first_name', 'middle_name', 'last_name', 'dob', 'sex']
-    list_filter = ['sex']
+    list_display = [
+        "id",
+        "created_at",
+        "updated_at",
+        "address",
+        "city",
+        "state",
+        "zip_code",
+        "email_address",
+        "phone_number",
+        "title",
+        "first_name",
+        "middle_name",
+        "last_name",
+        "dob",
+        "sex",
+    ]
+    search_fields = [
+        "id",
+        "address",
+        "city",
+        "state",
+        "zip_code",
+        "email_address",
+        "phone_number",
+        "title",
+        "first_name",
+        "middle_name",
+        "last_name",
+        "dob",
+        "sex",
+    ]
+    list_filter = ["sex"]
 
 
 class DefenderAdmin(admin.ModelAdmin):
-    list_display = ['id', 'created_at', 'updated_at', 'address', 'city', 'state', 'zip_code', 'email_address', 'phone_number', 'title', 'first_name', 'middle_name', 'last_name', 'lawfirm', 'license']
-    search_fields = ['id', 'address', 'city', 'state', 'zip_code', 'email_address', 'phone_number', 'title', 'first_name', 'middle_name', 'last_name', 'lawfirm', 'license']
+    list_display = [
+        "id",
+        "created_at",
+        "updated_at",
+        "address",
+        "city",
+        "state",
+        "zip_code",
+        "email_address",
+        "phone_number",
+        "title",
+        "first_name",
+        "middle_name",
+        "last_name",
+        "lawfirm",
+        "license",
+    ]
+    search_fields = [
+        "id",
+        "address",
+        "city",
+        "state",
+        "zip_code",
+        "email_address",
+        "phone_number",
+        "title",
+        "first_name",
+        "middle_name",
+        "last_name",
+        "lawfirm",
+        "license",
+    ]
     list_filter = []
 
 
 class HearingAdmin(admin.ModelAdmin):
-    list_display = ['id', 'created_at', 'updated_at', 'court_case', 'hearing_date', 'judge', 'hearing_type']
-    search_fields = ['id', 'hearing_date', 'hearing_type']
-    list_filter = ['court_case__case_number', 'judge', 'hearing_type']
+    list_display = ["id", "created_at", "updated_at", "court_case", "hearing_date", "judge", "hearing_type"]
+    search_fields = ["id", "hearing_date", "hearing_type"]
+    list_filter = ["court_case", "judge", "hearing_type"]
 
 
 class JudgeAdmin(admin.ModelAdmin):
-    list_display = ['id', 'created_at', 'updated_at', 'address', 'city', 'state', 'zip_code', 'email_address', 'phone_number', 'title', 'first_name', 'middle_name', 'last_name']
-    search_fields = ['id', 'address', 'city', 'state', 'zip_code', 'email_address', 'phone_number', 'title', 'first_name', 'middle_name', 'last_name']
+    list_display = [
+        "id",
+        "created_at",
+        "updated_at",
+        "address",
+        "city",
+        "state",
+        "zip_code",
+        "email_address",
+        "phone_number",
+        "title",
+        "first_name",
+        "middle_name",
+        "last_name",
+    ]
+    search_fields = [
+        "id",
+        "address",
+        "city",
+        "state",
+        "zip_code",
+        "email_address",
+        "phone_number",
+        "title",
+        "first_name",
+        "middle_name",
+        "last_name",
+    ]
     list_filter = []
 
 
 class ProsecutorAdmin(admin.ModelAdmin):
-    list_display = ['id', 'created_at', 'updated_at', 'address', 'city', 'state', 'zip_code', 'email_address', 'phone_number', 'title', 'first_name', 'middle_name', 'last_name', 'lawfirm', 'license']
-    search_fields = ['id', 'address', 'city', 'state', 'zip_code', 'email_address', 'phone_number', 'title', 'first_name', 'middle_name', 'last_name', 'lawfirm', 'license']
+    list_display = [
+        "id",
+        "created_at",
+        "updated_at",
+        "address",
+        "city",
+        "state",
+        "zip_code",
+        "email_address",
+        "phone_number",
+        "title",
+        "first_name",
+        "middle_name",
+        "last_name",
+        "lawfirm",
+        "license",
+    ]
+    search_fields = [
+        "id",
+        "address",
+        "city",
+        "state",
+        "zip_code",
+        "email_address",
+        "phone_number",
+        "title",
+        "first_name",
+        "middle_name",
+        "last_name",
+        "lawfirm",
+        "license",
+    ]
     list_filter = []
 
 
