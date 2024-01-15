@@ -1,8 +1,7 @@
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-
 # import models
 from casemgr.models import Booking
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 @receiver(post_save, sender=Booking)

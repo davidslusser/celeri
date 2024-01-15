@@ -1,9 +1,8 @@
 import logging
 import time
 
-from celery import shared_task
-
 from casemgr.helpers.bookings.spokane_county import get_roster
+from celery import shared_task
 
 
 @shared_task(time_limit=30, max_retries=0, name="casemgr.test_task", queue="normal")

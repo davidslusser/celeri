@@ -1,7 +1,6 @@
 import csv
 
 from bs4 import BeautifulSoup
-
 from casemgr.models import Booking
 
 

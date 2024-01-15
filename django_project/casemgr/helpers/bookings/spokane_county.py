@@ -3,13 +3,12 @@ import time
 import arrow
 import requests
 from bs4 import BeautifulSoup
+from casemgr.helpers.generic import convert_currency_to_decimal, get_browser
+from casemgr.models import Booking
 from lxml import html
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-
-from casemgr.helpers.generic import convert_currency_to_decimal, get_browser
-from casemgr.models import Booking
 
 
 def write_to_db(content):

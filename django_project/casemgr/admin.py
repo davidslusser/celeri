@@ -1,7 +1,7 @@
-from django.contrib import admin
-
 # import models
-from casemgr.models import Booking, CaseFile, Court, CourtCase, Defendant, Defender, Hearing, Judge, Prosecutor
+from casemgr.models import (Booking, CaseFile, Court, CourtCase, Defendant,
+                            Defender, Hearing, Judge, Prosecutor)
+from django.contrib import admin
 
 
 class BookingAdmin(admin.ModelAdmin):

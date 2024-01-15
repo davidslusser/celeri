@@ -1,6 +1,5 @@
-from django.urls import path
-
 from casemgr.views import gui, report
+from django.urls import path
 
 urlpatterns = [
     # GUI views
