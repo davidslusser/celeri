@@ -6,4 +6,4 @@ class CasemgrConfig(AppConfig):
     name = "casemgr"
 
     def ready(self):
-        import casemgr.signals
+        import casemgr.signals # noqa: F401
