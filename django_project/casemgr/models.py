@@ -1,6 +1,6 @@
+from auditlog.registry import auditlog
 from django.db import models
 from django.urls import reverse
-from auditlog.registry import auditlog
 from handyhelpers.models import HandyHelperBaseModel
 
 
@@ -28,10 +28,10 @@ class Human(HandyHelperBaseModel, ContactObject):
 
 class Arrestee(Human):
     SEX_CHOICES = [
-        ("M", 'Male'),
-        ("F", 'Female'),
+        ("M", "Male"),
+        ("F", "Female"),
     ]
-    
+
     dob = models.DateField()
     sex = models.CharField(max_length=1, choices=SEX_CHOICES)
 
@@ -42,7 +42,7 @@ class Arrestee(Human):
 class Lawyer(Human, ContactObject):
     lawfirm = models.CharField(max_length=64, help_text="")
     license = models.CharField(max_length=32, unique=True, help_text="")
-    
+
     def __str__(self) -> str:
         return f"{self.first_name} {self.last_name}"
 
@@ -50,22 +50,33 @@ class Lawyer(Human, ContactObject):
         abstract = True
 
 
-class Booking(Arrestee):
-    booking_id = models.CharField(max_length=64, unique=True, help_text="")
-    booking_officer = models.CharField(max_length=64, blank=True, null=True, help_text="")
-    arresting_officer = models.CharField(max_length=64, blank=True, null=True, help_text="")
-    details = models.TextField(blank=True, null=True, help_text="")
+class Booking(HandyHelperBaseModel):
+    status_choices = [
+        ("YES", "YES"),
+        ("NO", "NO"),
+        ("CALL", "CALL"),
+    ]
+    booking_id = models.CharField(max_length=32, unique=True, help_text="")
+    county_id = models.CharField(max_length=32, blank=True, null=True, help_text="")
+    inmate_name = models.CharField(max_length=64, blank=True, null=True, help_text="")
+    intake_date = models.DateTimeField(blank=True, null=True, help_text="")
+    # booking_officer = models.CharField(max_length=64, blank=True, null=True, help_text="")
+    # arresting_officer = models.CharField(max_length=64, blank=True, null=True, help_text="")
+    # details = models.TextField(blank=True, null=True, help_text="")
+    status = models.CharField(max_length=32, blank=True, null=True)
+    bondable = models.CharField(max_length=8, choices=status_choices)
+    total_bond = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=12)
 
     def __str__(self) -> str:
-        return self.booking_id    
+        return self.booking_id
 
 
 class Court(HandyHelperBaseModel):
     COURT_TYPE_CHOICES = [
-        ("civil", 'civil'),
-        ("criminal", 'criminal'),
-        ("family", 'family'),
-        ("probate", 'probate'),
+        ("civil", "civil"),
+        ("criminal", "criminal"),
+        ("family", "family"),
+        ("probate", "probate"),
     ]
     name = models.CharField(max_length=32, help_text="")
     address = models.CharField(max_length=32, help_text="")
@@ -87,7 +98,7 @@ class CourtCase(HandyHelperBaseModel):
     booking = models.ForeignKey("Booking", on_delete=models.CASCADE)
     defendant = models.ForeignKey("Defendant", on_delete=models.CASCADE)
     defenders = models.ManyToManyField("Defender")
-    prosecutors = models.ManyToManyField("Prosecutor") 
+    prosecutors = models.ManyToManyField("Prosecutor")
     files = models.ManyToManyField("CaseFile")
 
     def __str__(self) -> str:
@@ -95,7 +106,7 @@ class CourtCase(HandyHelperBaseModel):
 
     def get_absolute_url(self) -> str:
         return reverse("casemgr:case", kwargs={"pk": self.pk})
-    
+
 
 class CaseFile(HandyHelperBaseModel):
     title = models.CharField(max_length=32, blank=True, null=True, help_text="")
@@ -106,25 +117,23 @@ class CaseFile(HandyHelperBaseModel):
 
 
 class Defendant(Arrestee):
-
     def __str__(self) -> str:
         return f"{self.first_name} {self.last_name}"
 
 
 class Defender(Lawyer):
-
     def __str__(self) -> str:
         return f"{self.first_name} {self.last_name}"
 
 
 class Hearing(HandyHelperBaseModel):
     HEARING_TYPE_CHOICES = [
-        ("civil", 'civil'),
-        ("criminal", 'criminal'),
-        ("family", 'family'),
-        ("probate", 'probate'),
+        ("civil", "civil"),
+        ("criminal", "criminal"),
+        ("family", "family"),
+        ("probate", "probate"),
     ]
-    
+
     court_case = models.ForeignKey("CourtCase", on_delete=models.CASCADE)
     hearing_date = models.DateField()
     judge = models.ForeignKey("Judge", on_delete=models.CASCADE)
@@ -139,12 +148,12 @@ class Hearing(HandyHelperBaseModel):
 
 class Judge(Human):
     """ """
+
     def __str__(self) -> str:
         return f"{self.first_name} {self.last_name}"
 
 
 class Prosecutor(Lawyer):
-
     def __str__(self) -> str:
         return f"{self.first_name} {self.last_name}"
 

@@ -1,7 +1,6 @@
 from celery import Celery
 from django.conf import settings
 
-
 celery_app = Celery("core")
 celery_app.config_from_object(settings)
 celery_app.autodiscover_tasks()

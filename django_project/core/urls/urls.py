@@ -16,11 +16,10 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth.views import logout_then_login
-from django.urls import path, include
+from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 
 from core import views
-
 
 urlpatterns = [
     # Django provided URLs

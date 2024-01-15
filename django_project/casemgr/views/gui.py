@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.views.generic import DetailView, View
-
 from handyhelpers.permissions import InAnyGroup
 from handyhelpers.views import HandyHelperIndexView, HandyHelperListPlusCreateAndFilterView
 
@@ -44,3 +43,12 @@ class Index(HandyHelperIndexView):
 # class DetailMyModel(DetailView):
 #     model = MyModel
 #     template_name = 'myapp/detail/mymodel.html'
+
+
+class Test(View):
+    template_name = "casemgr/custom/test3.html"
+
+    def get(self, request):
+        """render dashboard for casemgr specific data"""
+        context = {"title": "Casemgr Dashboard"}
+        return render(request, self.template_name, context=context)
